@@ -1,0 +1,13 @@
+#Virtual environment files
+venv/
+.env/
+.venv/
+
+#Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+#Data files
+data/
