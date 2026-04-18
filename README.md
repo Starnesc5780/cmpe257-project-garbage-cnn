@@ -3,8 +3,8 @@ CMPE257 (Machine Learning) Project - Garbage Image Classification using CNN
 
 ## Datasets
 Note: Datasets are not uploaded to this repository, users must download from the posted sources here. 
-    * Active Datasets are ones planned for project usage
-    * Inactive Datasets are ones that may be used in future, if needed
+* Active Datasets are ones planned for project usage
+* Inactive Datasets are ones that may be used in future, if needed
 ### Active Datasets
 * RealWaste, UC Irvine ML Repository, https://archive.ics.uci.edu/dataset/908/realwaste
 ### Inactive Datasets
