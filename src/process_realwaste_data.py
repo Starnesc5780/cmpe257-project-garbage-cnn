@@ -34,7 +34,7 @@ random_seed = 42
 
 #Preprocessing: Convert Data to PyTorch Transforms
 '''
-transforms.Compose will also help with Data Augmentation
+transforms.Compose will also help with Data Augmentation in the future
 For now, this is just resizing and normalization for the base CNN model
 '''
 def preprocess_data():
@@ -57,3 +57,31 @@ def preprocess_data():
     )
 
     return training_transform, evaluation_transform
+
+#Load Dataset into PyTorch Dataset Format
+def load_dataset():
+    dataset = datasets.ImageFolder(root=path_to_data)
+    return dataset
+
+#Split PyTorch Dataset into Training, Validation, and Testing Sets
+def split_dataset(data):
+    #Compute sizes for data splits
+    training_size = int(training_ratio * len(data))
+    validation_size = int(validation_ratio * len(data))
+    testing_size = len(data) - training_size - validation_size
+
+    #Randomly split dataset
+    training_dataset, validation_dataset, testing_dataset = random_split(
+        data,
+        [training_size, validation_size, testing_size],
+        generator=torch.Generator().manual_seed(random_seed),
+    )
+    return training_dataset, validation_dataset, testing_dataset
+
+#Create PyTorch DataLoaders for Batching (and Shuffling for Training)
+def create_dataloaders(training_dataset, validation_dataset, testing_dataset):
+    training_loader = DataLoader(training_dataset, batch_size=batch_size, shuffle=True)
+    validation_loader = DataLoader(validation_dataset, batch_size=batch_size, shuffle=False)
+    testing_loader = DataLoader(testing_dataset, batch_size=batch_size, shuffle=False)
+    return training_loader, validation_loader, testing_loader
+
