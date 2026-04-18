@@ -23,5 +23,5 @@ Note: Datasets are not uploaded to this repository, users must download from the
 3. Upgrade installer tools with: python -m pip install --upgrade pip setuptools wheel
 4. Install project libraries with: python -m pip install -r requirements.txt
 5. Verify libraries with: python -c 'import torch, torchvision, numpy, matplotlib, sklearn; print("libraries successfully imported")'
-* Note: might take several seconds
+    - Note: running this line might take several seconds
 6. Ready to run project scripts from /src
