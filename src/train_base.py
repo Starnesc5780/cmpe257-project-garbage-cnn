@@ -8,7 +8,7 @@ import os
 
 def main():
     print("Setting up data preprocessing (Base)...")
-    train_transform, eval_transform = preprocess_data()
+    train_transform = preprocess_data()
     
     full_dataset = load_dataset(transform=train_transform)
     train_data, val_data, test_data = split_dataset(full_dataset)
