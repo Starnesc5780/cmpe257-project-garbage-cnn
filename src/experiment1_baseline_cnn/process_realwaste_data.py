@@ -1,16 +1,16 @@
 '''
-Process RealWaste dataset and save it in a format suitable for training the CNN model.
+Process RealWaste dataset and save it in a format compatible with PyTorch
 Raw Data Notes:
-- Images are already sized to 524x524 pixels
-- Labels: 
+-Images are already sized to 524x524 pixels
+-Labels: (Manual renaming of some labels for simplicity)
     -Cardboard
-    -Food Organics
+    -Food Organics -> Organics
     -Glass
     -Metal
-    -Miscellaneous Trash
+    -Miscellaneous Trash -> Miscellaneous
     -Paper
     -Plastic
-    -Textile Trash
+    -Textile Trash -> Clothing
     -Vegetation
 '''
 
@@ -20,8 +20,7 @@ from torch.utils.data import DataLoader, Dataset, random_split
 from torchvision import datasets, transforms
 
 #Constants
-import os
-path_to_data = os.path.join(os.path.dirname(__file__), "datasets", "realwaste-main", "RealWaste")
+path_to_data = "../../data/raw/realwaste-main/RealWaste"
 image_size = 224 #resizing images to 224x224 for CNN input (original 524x524)
 batch_size = 32
 
@@ -35,39 +34,22 @@ random_seed = 42
 
 #Preprocessing: Convert Data to PyTorch Transforms
 '''
-transforms.Compose will also help with Data Augmentation in the future
-For now, this is just resizing and normalization for the base CNN model
+-transforms.Compose config will also help with Data Augmentation in the future
+    -Image flipping, rotating, color jitter
+-For now, this is just resizing and normalization for the base CNN model
 '''
-def preprocess_data(use_augmentation=False):
-    if use_augmentation:
-        training_transform = transforms.Compose(
-            [
-                transforms.Resize((image_size, image_size)),
-                transforms.RandomHorizontalFlip(),
-                transforms.RandomRotation(15),
-                transforms.ToTensor(),
-                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-            ]
-        )
-    else:
-        training_transform = transforms.Compose(
-            [
-                transforms.Resize((image_size, image_size)),
-                transforms.ToTensor(),
-                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-            ]
-        )
-
-    #Preprocessed Data Transform for Validation and Testing
-    evaluation_transform = transforms.Compose(
+def preprocess_data():
+    #Preprocessed Data Transform
+    base_transform = transforms.Compose(
         [
             transforms.Resize((image_size, image_size)),
             transforms.ToTensor(),
             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
         ]
     )
+    #Future implementation will have a separate train_transform with data augmentation
 
-    return training_transform, evaluation_transform
+    return base_transform
 
 #Load Dataset into PyTorch Dataset Format
 def load_dataset(transform=None):

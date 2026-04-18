@@ -1,14 +1,14 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
-from basic_cnn import BaseGarbageCNN
+from experiment1_baseline_cnn.process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
+from experiment1_baseline_cnn.basic_cnn import BaseGarbageCNN
 from sklearn.metrics import classification_report
 import os
 
 def main():
     print("Setting up data preprocessing (Base)...")
-    train_transform, eval_transform = preprocess_data()
+    train_transform = preprocess_data()
     
     full_dataset = load_dataset(transform=train_transform)
     train_data, val_data, test_data = split_dataset(full_dataset)
