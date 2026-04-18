@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
-from basic_cnn import BaseGarbageCNN
+from experiment1_baseline_cnn.process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
+from experiment1_baseline_cnn.basic_cnn import BaseGarbageCNN
 from sklearn.metrics import classification_report
 import os
 
