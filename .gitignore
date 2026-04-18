@@ -11,3 +11,6 @@ __pycache__/
 
 #Data files
 data/
+
+#Others
+.DS_Store
