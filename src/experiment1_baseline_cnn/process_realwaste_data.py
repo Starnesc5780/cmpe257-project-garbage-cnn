@@ -20,7 +20,7 @@ from torch.utils.data import DataLoader, Dataset, random_split
 from torchvision import datasets, transforms
 
 #Constants
-path_to_data = "/data/raw/realwaste-main/RealWaste"
+path_to_data = "../../data/raw/realwaste-main/RealWaste"
 image_size = 224 #resizing images to 224x224 for CNN input (original 524x524)
 batch_size = 32
 
