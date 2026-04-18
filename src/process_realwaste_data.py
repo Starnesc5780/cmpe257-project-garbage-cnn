@@ -20,7 +20,8 @@ from torch.utils.data import DataLoader, Dataset, random_split
 from torchvision import datasets, transforms
 
 #Constants
-path_to_data = "/data/raw/realwaste-main"
+import os
+path_to_data = os.path.join(os.path.dirname(__file__), "datasets", "realwaste-main", "RealWaste")
 image_size = 224 #resizing images to 224x224 for CNN input (original 524x524)
 batch_size = 32
 
@@ -37,15 +38,25 @@ random_seed = 42
 transforms.Compose will also help with Data Augmentation in the future
 For now, this is just resizing and normalization for the base CNN model
 '''
-def preprocess_data():
-    #Preprocessed Data Transform for Training
-    training_transform = transforms.Compose(
-        [
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
-            transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-        ]
-    )
+def preprocess_data(use_augmentation=False):
+    if use_augmentation:
+        training_transform = transforms.Compose(
+            [
+                transforms.Resize((image_size, image_size)),
+                transforms.RandomHorizontalFlip(),
+                transforms.RandomRotation(15),
+                transforms.ToTensor(),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+            ]
+        )
+    else:
+        training_transform = transforms.Compose(
+            [
+                transforms.Resize((image_size, image_size)),
+                transforms.ToTensor(),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+            ]
+        )
 
     #Preprocessed Data Transform for Validation and Testing
     evaluation_transform = transforms.Compose(
@@ -59,8 +70,8 @@ def preprocess_data():
     return training_transform, evaluation_transform
 
 #Load Dataset into PyTorch Dataset Format
-def load_dataset():
-    dataset = datasets.ImageFolder(root=path_to_data)
+def load_dataset(transform=None):
+    dataset = datasets.ImageFolder(root=path_to_data, transform=transform)
     return dataset
 
 #Split PyTorch Dataset into Training, Validation, and Testing Sets
