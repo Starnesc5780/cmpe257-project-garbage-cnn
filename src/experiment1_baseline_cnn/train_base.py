@@ -1,14 +1,14 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from experiment1_baseline_cnn.process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
-from experiment1_baseline_cnn.basic_cnn import BaseGarbageCNN
+from process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
+from basic_cnn import BaseGarbageCNN
 from sklearn.metrics import classification_report
 import os
 
 def main():
     print("Setting up data preprocessing (Base)...")
-    train_transform = preprocess_data()
+    train_transform, eval_transform = preprocess_data(use_augmentation=False)
     
     full_dataset = load_dataset(transform=train_transform)
     train_data, val_data, test_data = split_dataset(full_dataset)
@@ -23,7 +23,11 @@ def main():
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-    epochs = 3
+    epochs = 30
+    
+    # Learning Rate Scheduler (Cosine Annealing)
+    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
+    
     print(f"Starting Base CNN training for {epochs} epochs...")
     
     for epoch in range(epochs):
@@ -49,6 +53,9 @@ def main():
         epoch_loss = running_loss / len(train_loader)
         epoch_acc = 100 * correct / total
         print(f"--- Epoch {epoch+1} Summary: Train Loss: {epoch_loss:.4f}, Train Acc: {epoch_acc:.2f}%")
+        
+        # Step the learning rate scheduler
+        scheduler.step()
         
         # Validation
         model.eval()
@@ -106,8 +113,12 @@ def main():
     print("Test Data Classification Report (Precision, Recall, F1-Score):")
     print(classification_report(test_labels, test_preds, target_names=full_dataset.classes, zero_division=0))
     
-    os.makedirs('models', exist_ok=True)
-    model_path = os.path.join('models', 'base_cnn_optimized.pth')
+    # Save the model
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    models_dir = os.path.join(project_root, 'models')
+    os.makedirs(models_dir, exist_ok=True)
+    
+    model_path = os.path.join(models_dir, 'base_cnn_optimized.pth')
     torch.save(model.state_dict(), model_path)
     print(f"Model saved successfully to {model_path}")
 

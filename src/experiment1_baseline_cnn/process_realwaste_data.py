@@ -19,8 +19,10 @@ import torch
 from torch.utils.data import DataLoader, Dataset, random_split
 from torchvision import datasets, transforms
 
+import os
+
 #Constants
-path_to_data = "../../data/raw/realwaste-main/RealWaste"
+path_to_data = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw', 'realwaste-main', 'RealWaste')
 image_size = 224 #resizing images to 224x224 for CNN input (original 524x524)
 batch_size = 32
 
@@ -38,18 +40,37 @@ random_seed = 42
     -Image flipping, rotating, color jitter
 -For now, this is just resizing and normalization for the base CNN model
 '''
-def preprocess_data():
-    #Preprocessed Data Transform
-    base_transform = transforms.Compose(
+def preprocess_data(use_augmentation=False):
+    if use_augmentation:
+        training_transform = transforms.Compose(
+            [
+                transforms.Resize((image_size, image_size)),
+                transforms.RandomHorizontalFlip(),
+                transforms.RandomRotation(15),
+                transforms.ColorJitter(brightness=0.2, contrast=0.2),
+                transforms.ToTensor(),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+            ]
+        )
+    else:
+        training_transform = transforms.Compose(
+            [
+                transforms.Resize((image_size, image_size)),
+                transforms.ToTensor(),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+            ]
+        )
+
+    # Preprocessed Data Transform for Validation and Testing
+    evaluation_transform = transforms.Compose(
         [
             transforms.Resize((image_size, image_size)),
             transforms.ToTensor(),
             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
         ]
     )
-    #Future implementation will have a separate train_transform with data augmentation
 
-    return base_transform
+    return training_transform, evaluation_transform
 
 #Load Dataset into PyTorch Dataset Format
 def load_dataset(transform=None):
