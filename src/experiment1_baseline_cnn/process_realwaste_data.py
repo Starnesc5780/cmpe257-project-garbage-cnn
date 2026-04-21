@@ -12,6 +12,7 @@ Raw Data Notes:
     -Plastic
     -Textile Trash -> Clothing
     -Vegetation
+-Counts: Total 4761 images, with an average of 529 examples per label (9 labels total)
 '''
 
 #Imports
@@ -21,8 +22,8 @@ from torchvision import datasets, transforms
 
 #Constants
 path_to_data = "../../data/raw/realwaste-main/RealWaste"
-image_size = 224 #resizing images to 224x224 for CNN input (original 524x524)
-batch_size = 32
+image_size = 224 #resizing images to image_size by image_size for CNN input (original 524x524)
+batch_size = 32 #since our dataset is relatively small in size, we should use batch size 32 or 64
 
 #Data Splits
 training_ratio = 0.7
