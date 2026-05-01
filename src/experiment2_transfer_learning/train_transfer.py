@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
-from transfer_model import get_finetune_model
+from experiment2_transfer_learning.transfer_model import get_finetune_model
 from sklearn.metrics import classification_report
 import os
 
