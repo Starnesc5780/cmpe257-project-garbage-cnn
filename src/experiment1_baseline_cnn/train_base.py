@@ -6,7 +6,7 @@ from basic_cnn import BaseGarbageCNN
 from sklearn.metrics import classification_report
 import os
 
-train_transform, eval_transform = preprocess_data(use_augmentation=False)
+train_transform, evaluation_transform = preprocess_data(use_augmentation=False)
 full_dataset = load_dataset(transform=train_transform)
 train_data, val_data, test_data = split_dataset(full_dataset)
 train_loader, val_loader, test_loader = create_dataloaders(train_data, val_data, test_data)

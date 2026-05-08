@@ -17,7 +17,7 @@ Raw Data Notes:
 
 #Imports
 import torch
-from torch.utils.data import DataLoader, Dataset, random_split
+from torch.utils.data import DataLoader, ConcatDataset, Subset
 from torchvision import datasets, transforms
 
 #Constants
@@ -34,26 +34,41 @@ testing_ratio = 0.15
 random_seed = 42
 
 #Preprocessing: Convert Data to PyTorch Transforms w/ Data Augmentation
-'''
--transforms.Compose config will also help with Data Augmentation in the future
-    -Image flipping, rotating, color jitter
--For now, this is just resizing and normalization for the base CNN model
-'''
-# def augment_data():
-#     #Preprocessed Data Transform
-#     augmented_transform = transforms.Compose(
-#         [
-#             transforms.Resize((image_size, image_size)),
-#             transforms.ToTensor(),
-#             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-#         ]
-#     )
-#     #Future implementation will have a separate train_transform with data augmentation
-#     return augmented_transform
+def preprocess_data(use_augmentation=True):
+    if use_augmentation:
+        training_transform = transforms.Compose(
+            [
+                transforms.RandomResizedCrop(image_size, scale=(0.8, 1.0)), #random zoom in/crop
+                transforms.RandomHorizontalFlip(),
+                transforms.RandomRotation(15),
+                transforms.ColorJitter(brightness=0.2, contrast=0.2),
+                transforms.ToTensor(),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+            ]
+        )
+    else:
+        training_transform = transforms.Compose(
+            [
+                transforms.Resize((image_size, image_size)),
+                transforms.ToTensor(),
+                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+            ]
+        )
+
+    # Preprocessed Data Transform for Validation and Testing
+    evaluation_transform = transforms.Compose(
+        [
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+        ]
+    )
+
+    return training_transform, evaluation_transform
 
 #Load Dataset into PyTorch Dataset Format
-def load_dataset():
-    dataset = datasets.ImageFolder(root=path_to_data)
+def load_dataset(transform=None):
+    dataset = datasets.ImageFolder(root=path_to_data, transform=transform)
     return dataset
 
 #Split PyTorch Dataset into Training, Validation, and Testing Sets
@@ -63,13 +78,30 @@ def split_dataset(data):
     validation_size = int(validation_ratio * len(data))
     testing_size = len(data) - training_size - validation_size
 
-    #Randomly split dataset
-    training_dataset, validation_dataset, testing_dataset = random_split(
-        data,
-        [training_size, validation_size, testing_size],
-        generator=torch.Generator().manual_seed(random_seed),
-    )
-    return training_dataset, validation_dataset, testing_dataset
+    #Randomly split indices so we can reuse the same examples with different transforms
+    generator = torch.Generator().manual_seed(random_seed)
+    shuffled_indices = torch.randperm(len(data), generator=generator).tolist()
+
+    training_indices = shuffled_indices[:training_size]
+    validation_indices = shuffled_indices[training_size : training_size + validation_size]
+    testing_indices = shuffled_indices[training_size + validation_size :]
+
+    return training_indices, validation_indices, testing_indices
+
+
+#Concatenates the original data with the transformed data to create an augmented dataset
+def create_training_dataset(training_indices, training_transform, evaluation_transform):
+    original_dataset = load_dataset(transform=evaluation_transform)
+    augmented_dataset = load_dataset(transform=training_transform)
+    original_training_subset = Subset(original_dataset, training_indices)
+    augmented_training_subset = Subset(augmented_dataset, training_indices)
+    return ConcatDataset([original_training_subset, augmented_training_subset])
+
+
+#Evaluation dataset only uses original dataset (no transformations)
+def create_evaluation_dataset(transform, indices):
+    dataset = load_dataset(transform=transform)
+    return Subset(dataset, indices)
 
 #Create PyTorch DataLoaders for Batching (and Shuffling for Training)
 def create_dataloaders(training_dataset, validation_dataset, testing_dataset):

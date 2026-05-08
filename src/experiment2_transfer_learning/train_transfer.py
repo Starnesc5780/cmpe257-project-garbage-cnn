@@ -9,7 +9,7 @@ import os
 def main():
     # 1. Preprocessing and Data Loading
     print("Setting up data preprocessing...")
-    train_transform, eval_transform = preprocess_data()
+    train_transform, evaluation_transform = preprocess_data()
     
     # Since transforms are currently identical, we apply the training_transform to the whole dataset.
     print("Loading dataset...")

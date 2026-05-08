@@ -1,30 +1,36 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
-from basic_cnn import BaseGarbageCNN
+from process_augment_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
+from process_augment_data import create_training_dataset, create_evaluation_dataset
+from experiment3_data_augmentation.aug_cnn import BaseGarbageCNN
 from sklearn.metrics import classification_report
 import os
 
 def main():
     print("Setting up data preprocessing (With Augmentation)...")
-    train_transform, eval_transform = preprocess_data(use_augmentation=True)
-    
-    full_dataset = load_dataset(transform=train_transform)
-    train_data, val_data, test_data = split_dataset(full_dataset)
+    train_transform, evaluation_transform = preprocess_data(use_augmentation=True)
+
+    base_dataset = load_dataset(transform=evaluation_transform)
+    train_indices, val_indices, test_indices = split_dataset(base_dataset)
+
+    train_data = create_training_dataset(train_indices, train_transform, evaluation_transform)
+    val_data = create_evaluation_dataset(evaluation_transform, val_indices)
+    test_data = create_evaluation_dataset(evaluation_transform, test_indices)
+
     train_loader, val_loader, test_loader = create_dataloaders(train_data, val_data, test_data)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     
-    num_classes = len(full_dataset.classes)
+    num_classes = len(base_dataset.classes)
     model = BaseGarbageCNN(num_classes=num_classes).to(device)
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     epochs = 3
-    print(f"Starting Augmented Base CNN training for {epochs} epochs...")
+    print(f"Starting Data-Augmented Base CNN training for {epochs} epochs...")
     
     for epoch in range(epochs):
         model.train()
@@ -76,7 +82,7 @@ def main():
         print(f"--- Epoch {epoch+1} Validation: Loss: {val_loss/len(val_loader):.4f}, Acc: {100 * val_correct / val_total:.2f}%")
         if epoch == epochs - 1:
             print("\nClassification Report (Augmented Base CNN):")
-            print(classification_report(all_labels, all_preds, target_names=full_dataset.classes, zero_division=0))
+            print(classification_report(all_labels, all_preds, target_names=base_dataset.classes, zero_division=0))
 
     print("Augmented Base CNN training complete!")
     
@@ -104,7 +110,7 @@ def main():
     test_acc = 100 * test_correct / test_total
     print(f"FINAL TEST ACCURACY: {test_acc:.2f}%\n")
     print("Test Data Classification Report (Precision, Recall, F1-Score):")
-    print(classification_report(test_labels, test_preds, target_names=full_dataset.classes, zero_division=0))
+    print(classification_report(test_labels, test_preds, target_names=base_dataset.classes, zero_division=0))
     
     os.makedirs('models', exist_ok=True)
     model_path = os.path.join('models', 'base_cnn_augmented.pth')
