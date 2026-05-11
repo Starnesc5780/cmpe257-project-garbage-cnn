@@ -86,8 +86,7 @@ with torch.no_grad():
 test_acc = 100 * test_correct / test_total
 print(f"final test accuracy: {test_acc:.2f}%\n")
 print(classification_report(test_labels, test_preds, target_names=full_dataset.classes, zero_division=0))
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-models_dir = os.path.join(project_root, 'models')
+models_dir = os.path.join(os.path.dirname(__file__), 'models')
 os.makedirs(models_dir, exist_ok=True)
 
 model_path = os.path.join(models_dir, 'base_cnn_optimized.pth')

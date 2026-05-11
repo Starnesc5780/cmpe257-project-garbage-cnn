@@ -111,8 +111,9 @@ def main():
     print("Test Data Classification Report (Precision, Recall, F1-Score):")
     print(classification_report(test_labels, test_preds, target_names=base_dataset.classes, zero_division=0))
     
-    os.makedirs('models', exist_ok=True)
-    model_path = os.path.join('models', 'base_cnn_augmented.pth')
+    models_dir = os.path.join(os.path.dirname(__file__), 'models')
+    os.makedirs(models_dir, exist_ok=True)
+    model_path = os.path.join(models_dir, 'base_cnn_augmented.pth')
     torch.save(model.state_dict(), model_path)
     print(f"Model saved successfully to {model_path}")
 

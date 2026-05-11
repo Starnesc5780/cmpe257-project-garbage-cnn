@@ -129,8 +129,9 @@ def main():
     print(classification_report(test_labels, test_preds, target_names=full_dataset.classes, zero_division=0))
     
     # Save the model
-    os.makedirs('models', exist_ok=True)
-    model_path = os.path.join('models', 'transfer_cnn.pth')
+    models_dir = os.path.join(os.path.dirname(__file__), 'models')
+    os.makedirs(models_dir, exist_ok=True)
+    model_path = os.path.join(models_dir, 'transfer_cnn.pth')
     torch.save(model.state_dict(), model_path)
     print(f"Model saved successfully to {model_path}")
 
