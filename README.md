@@ -25,3 +25,10 @@ Note: Datasets are not uploaded to this repository, users must download from the
 5. Verify libraries with: python -c 'import torch, torchvision, numpy, matplotlib, sklearn; print("libraries successfully imported")'
     - Note: running this line might take several seconds
 6. Ready to run project scripts from /src
+
+## Training with GPU
+* Make sure you have cuda-compatible GPU (e.g. Nvidia)
+* Can test with: python -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get_device_name() if torch.cuda.is_available() else 'No GPU'"
+* If you see "False No GPU", you need to reinstall torch + torchvision with cuda-compatibility: 
+    * First Uninstall: python -m pip uninstall torch torchvision -y
+    * Then Install from URL: python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
