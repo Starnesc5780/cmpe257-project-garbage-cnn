@@ -1,14 +1,17 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from process_realwaste_data import preprocess_data, load_dataset, split_dataset, create_dataloaders
+from data_processing.process_data import *
 from basic_cnn import BaseGarbageCNN
 from sklearn.metrics import classification_report
 import os
 
 train_transform, evaluation_transform = preprocess_data(use_augmentation=False)
-full_dataset = load_dataset(transform=train_transform)
-train_data, val_data, test_data = split_dataset(full_dataset)
+full_dataset = load_dataset(transform=evaluation_transform)
+train_idx, val_idx, test_idx = split_dataset_indices(full_dataset)
+train_data = create_base_dataset(evaluation_transform, train_idx)
+val_data = create_base_dataset(evaluation_transform, val_idx)
+test_data = create_base_dataset(evaluation_transform, test_idx)
 train_loader, val_loader, test_loader = create_dataloaders(train_data, val_data, test_data)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu") #needed for gpu training
 print(f"gpu check: {device}")
