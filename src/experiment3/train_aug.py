@@ -1,10 +1,16 @@
+import os
+import sys
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from sklearn.metrics import classification_report
+
+SRC_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if SRC_ROOT not in sys.path:
+    sys.path.insert(0, SRC_ROOT)
+
 from data_processing.process_data import *
 from aug_cnn import BaseGarbageCNN
-from sklearn.metrics import classification_report
-import os
 
 def main():
     print("Setting up data preprocessing (With Augmentation)...")
@@ -28,10 +34,14 @@ def main():
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-    epochs = 3
-    print(f"Starting Data-Augmented Base CNN training for {epochs} epochs...")
+    max_epochs = 20
+    patience = 4
+    best_val_loss = float("inf")
+    patience_counter = 0
+    best_state_dict = None
+    print(f"Starting Data-Augmented Base CNN training for up to {max_epochs} epochs...")
     
-    for epoch in range(epochs):
+    for epoch in range(max_epochs):
         model.train()
         running_loss = 0.0
         correct = 0
@@ -50,6 +60,9 @@ def main():
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
+
+            if (i + 1) % 10 == 0:
+                print(f"Epoch [{epoch+1}/{max_epochs}], Step [{i+1}/{len(train_loader)}], Loss: {loss.item():.4f}, Accuracy: {100 * correct / total:.2f}%")
                 
         epoch_loss = running_loss / len(train_loader)
         epoch_acc = 100 * correct / total
@@ -78,10 +91,26 @@ def main():
                 all_preds.extend(predicted.cpu().numpy())
                 all_labels.extend(labels.cpu().numpy())
         
-        print(f"--- Epoch {epoch+1} Validation: Loss: {val_loss/len(val_loader):.4f}, Acc: {100 * val_correct / val_total:.2f}%")
-        if epoch == epochs - 1:
+        val_loss_avg = val_loss / len(val_loader)
+        val_acc = 100 * val_correct / val_total
+        print(f"--- Epoch {epoch+1} Validation: Loss: {val_loss_avg:.4f}, Acc: {val_acc:.2f}%")
+
+        if val_loss_avg < best_val_loss:
+            best_val_loss = val_loss_avg
+            patience_counter = 0
+            best_state_dict = {key: value.cpu().clone() for key, value in model.state_dict().items()}
+        else:
+            patience_counter += 1
+            if patience_counter >= patience:
+                print(f"Early stopping at epoch {epoch+1} (best val loss: {best_val_loss:.4f})")
+                break
+
+        if epoch == max_epochs - 1:
             print("\nClassification Report (Augmented Base CNN):")
             print(classification_report(all_labels, all_preds, target_names=base_dataset.classes, zero_division=0))
+
+    if best_state_dict is not None:
+        model.load_state_dict(best_state_dict)
 
     print("Augmented Base CNN training complete!")
     

@@ -1,10 +1,17 @@
+import os
+import sys
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from data_processing.process_data import *
-from basic_cnn import BaseGarbageCNN
 from sklearn.metrics import classification_report
-import os
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from src.data_processing.process_data import *
+from src.experiment1.basic_cnn import BaseGarbageCNN
 
 train_transform, evaluation_transform = preprocess_data(use_augmentation=False)
 full_dataset = load_dataset(transform=evaluation_transform)
@@ -19,9 +26,13 @@ num_classes = len(full_dataset.classes)
 model = BaseGarbageCNN(num_classes=num_classes).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
-epochs = 18    # optimal number before overfitting
-scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
-for epoch in range(epochs):
+max_epochs = 20
+patience = 4
+best_val_loss = float("inf")
+patience_counter = 0
+best_state_dict = None
+scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=max_epochs)
+for epoch in range(max_epochs):
     model.train()
     running_loss = 0.0
     correct = 0
@@ -63,9 +74,22 @@ for epoch in range(epochs):
     val_acc = 100 * val_correct / val_total
     val_loss_avg = val_loss/len(val_loader)
     print(f"epoch {epoch+1} val, loss: {val_loss_avg:.4f}, acc: {val_acc:.2f}%")
-    
-    if epoch == epochs - 1:
+
+    if val_loss_avg < best_val_loss:
+        best_val_loss = val_loss_avg
+        patience_counter = 0
+        best_state_dict = {key: value.cpu().clone() for key, value in model.state_dict().items()}
+    else:
+        patience_counter += 1
+        if patience_counter >= patience:
+            print(f"early stopping at epoch {epoch+1} (best val loss: {best_val_loss:.4f})")
+            break
+
+    if epoch == max_epochs - 1:
         print(classification_report(all_labels, all_preds, target_names=full_dataset.classes, zero_division=0))
+
+if best_state_dict is not None:
+    model.load_state_dict(best_state_dict)
 
 print("\nTest Data Step")
 model.eval()

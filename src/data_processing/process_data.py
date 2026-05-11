@@ -1,9 +1,12 @@
+import os
+
 import torch
 from torch.utils.data import ConcatDataset, DataLoader, Subset
 from torchvision import datasets, transforms
 
 # Constants
-DATA_PATH = "../../data/raw/realwaste-main/RealWaste"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "realwaste-main", "RealWaste")
 IMAGE_SIZE = 224
 BATCH_SIZE = 32 #standard batch size for training CNNs
 TRAINING_RATIO = 0.7
