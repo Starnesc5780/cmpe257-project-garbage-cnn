@@ -14,6 +14,10 @@ Note: Datasets are not uploaded to this repository, users must download from the
 ### Inactive Datasets
 * Waste Classification Dataset, Mendeley Data, https://archive.ics.uci.edu/dataset/908/realwaste
 
+## Using Datasets
+* Make directory: [root]/data/raw
+* Extract the dataset image folder into the new directory
+
 
 ## Development Environment Setup
 0. Make sure you use the Python Version in .python-version file 
