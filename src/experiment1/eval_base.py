@@ -13,7 +13,7 @@ from basic_cnn import BaseGarbageCNN
 
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    _, evaluation_transform = preprocess_data(use_augmentation=False)
+    training_transform, evaluation_transform = preprocess_data(use_augmentation=False)
 
     full_dataset = datasets.ImageFolder(root=DATASET_PATH, transform=evaluation_transform)
     test_loader = build_test_loader(full_dataset, batch_size=BATCH_SIZE)
