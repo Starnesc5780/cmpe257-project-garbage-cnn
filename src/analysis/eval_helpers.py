@@ -13,12 +13,12 @@ def build_test_loader(dataset, batch_size=BATCH_SIZE):
 def load_checkpoint(model, checkpoint_path, device):
 	try:
 		state_dict = torch.load(checkpoint_path, map_location=device)
-	except FileNotFoundError as exc:
-		raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}") from exc
+	except FileNotFoundError as e:
+		raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}") from e
 	model.load_state_dict(state_dict)
 	return model
 
-
+#Generate Test Predictions
 def evaluate_model(model, test_loader, device):
 	model.eval()
 	test_preds = []
@@ -30,16 +30,17 @@ def evaluate_model(model, test_loader, device):
 			_, predicted = torch.max(outputs.data, 1)
 			test_preds.extend(predicted.cpu().numpy())
 			test_labels.extend(labels.cpu().numpy())
-
 	return test_labels, test_preds
 
 
-def compute_metrics(test_labels, test_preds, class_names):
+def compute_metrics(test_labels, test_predictions, class_names):
 	#Compute the evaluation metrics used by all experiment scripts
-	accuracy = accuracy_score(test_labels, test_preds)
-	macro_f1 = f1_score(test_labels, test_preds, average="macro", zero_division=0)
-	report = classification_report(test_labels, test_preds, target_names=class_names, zero_division=0, output_dict=True)
-	conf_matrix = confusion_matrix(test_labels, test_preds)
+	accuracy = accuracy_score(test_labels, test_predictions)
+	#macro F1 averages F1 scores across classes
+	macro_f1 = f1_score(test_labels, test_predictions, average="macro", zero_division=0)
+	report = classification_report(test_labels, test_predictions, target_names=class_names, zero_division=0, output_dict=True)
+	conf_matrix = confusion_matrix(test_labels, test_predictions)
+	#Return in dictionary format
 	return {
 		"accuracy": accuracy,
 		"macro_f1": macro_f1,
@@ -50,15 +51,10 @@ def compute_metrics(test_labels, test_preds, class_names):
 
 def print_metrics(experiment_name, checkpoint_path, metrics):
 	print(f"{experiment_name} checkpoint: {checkpoint_path}")
-	print(f"{experiment_name} accuracy: {metrics['accuracy'] * 100:.2f}%")
-	print(f"{experiment_name} macro F1: {metrics['macro_f1']:.4f}")
-	print("Per-class precision/recall/F1:")
-	for class_name, scores in metrics["report"].items():
-		if class_name in ("accuracy", "macro avg", "weighted avg"):
-			continue
-		print(
-			f"  {class_name}: precision={scores['precision']:.4f}, "
-			f"recall={scores['recall']:.4f}, f1={scores['f1-score']:.4f}"
-		)
+	print(f"{experiment_name} accuracy: {metrics['accuracy'] * 100}%")
+	print(f"{experiment_name} macro F1: {metrics['macro_f1']}")
+	print("Classification Report:")
+	print(metrics["report"])
 	print("Confusion matrix:")
 	print(metrics["confusion_matrix"])
+	return
