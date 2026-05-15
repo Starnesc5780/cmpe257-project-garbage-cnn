@@ -12,25 +12,20 @@ if SRC_ROOT not in sys.path:
 from data_processing.process_data import *
 from transfer_model import get_finetune_model
 
-train_transform, evaluation_transform = preprocess_data()
+train_transform, evaluation_transform = preprocess_data(use_augmentation=True)
 
-try:
-    full_dataset = load_dataset(transform=evaluation_transform)
-except Exception as e:
-    print(f"Failed to load dataset: {e}")
-    sys.exit(1)
-
-train_idx, val_idx, test_idx = split_dataset_indices(full_dataset)
-train_data = create_base_dataset(evaluation_transform, train_idx)
-val_data = create_base_dataset(evaluation_transform, val_idx)
-test_data = create_base_dataset(evaluation_transform, test_idx)
+base_dataset = load_dataset(transform=evaluation_transform)
+train_indices, val_indices, test_indices = split_dataset_indices(base_dataset)
+train_data = create_augmented_dataset(train_indices, train_transform, evaluation_transform)
+val_data = create_base_dataset(evaluation_transform, val_indices)
+test_data = create_base_dataset(evaluation_transform, test_indices)
 
 train_loader, val_loader, test_loader = create_dataloaders(train_data, val_data, test_data)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
 
-num_classes = len(full_dataset.classes)
+num_classes = len(base_dataset.classes)
 model = get_finetune_model(num_classes=num_classes).to(device)
 
 criterion = nn.CrossEntropyLoss()
@@ -109,7 +104,7 @@ for epoch in range(max_epochs):
 if best_state_dict is not None:
     model.load_state_dict(best_state_dict)
 
-# Evaluation
+# 4. Evaluation
 model.eval()
 test_preds = []
 test_labels = []
@@ -119,13 +114,14 @@ with torch.no_grad():
         inputs, labels = inputs.to(device), labels.to(device)
         outputs = model(inputs)
         _, predicted = torch.max(outputs.data, 1)
+        
         test_preds.extend(predicted.cpu().numpy())
         test_labels.extend(labels.cpu().numpy())
         
-print(classification_report(test_labels, test_preds, target_names=full_dataset.classes, zero_division=0))
+print(classification_report(test_labels, test_preds, target_names=base_dataset.classes, zero_division=0))
 
 models_dir = os.path.join(os.path.dirname(__file__), 'models')
 os.makedirs(models_dir, exist_ok=True)
-model_path = os.path.join(models_dir, 'transfer_cnn.pth')
+model_path = os.path.join(models_dir, 'transfer_cnn_augmented.pth')
 torch.save(model.state_dict(), model_path)
 print(f"Saved to {model_path}")
