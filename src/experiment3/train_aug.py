@@ -14,7 +14,7 @@ from data_processing.process_data import *
 from aug_cnn import BaseGarbageCNN
 
 #export prints to file
-# sys.stdout = open('training_logs/base_cnn_augmented_training_log.txt', 'w')
+sys.stdout = open('training_logs/base_cnn_augmented_training_log.txt', 'w')
 
 # Preprocessing and Data Loading
 train_transform, evaluation_transform = preprocess_data(use_augmentation=True)
@@ -113,6 +113,7 @@ for epoch in range(max_epochs):
             break
 
 end_time = time.time()
+print(f"early stopping: best epoch found at epoch {best_epoch} (best val loss: {best_val_loss:.4f})")
 print(f"Model 3 training completed in {(end_time - start_time) / 60:.2f} minutes")
 print(f"Model 3 best epoch found after {(best_epoch_time - start_time) / 60:.2f} minutes")
 if best_state_dict is not None:
