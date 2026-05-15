@@ -6,7 +6,7 @@ from torchvision import datasets, transforms
 
 # Constants
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-DATA_PATH = os.path.join(PROJECT_ROOT, "src", "data", "raw", "realwaste-main", "RealWaste")
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "realwaste-main", "RealWaste")
 IMAGE_SIZE = 224
 BATCH_SIZE = 32 #standard batch size for training CNNs
 TRAINING_RATIO = 0.7

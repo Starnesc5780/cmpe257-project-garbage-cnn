@@ -13,6 +13,9 @@ if SRC_ROOT not in sys.path:
 from data_processing.process_data import *
 from aug_cnn import BaseGarbageCNN
 
+#export prints to file
+sys.stdout = open('models/base_cnn_augmented_training_log.txt', 'w')
+
 # Preprocessing and Data Loading
 train_transform, evaluation_transform = preprocess_data(use_augmentation=True)
 
@@ -40,6 +43,8 @@ best_val_loss = float("inf")
 patience_counter = 0
 best_state_dict = None
 start_time = time.time()
+best_epoch_time = start_time
+best_epoch = 0
 print(f"Training for {max_epochs} epochs...")
 
 
@@ -98,15 +103,18 @@ for epoch in range(max_epochs):
     if val_loss_avg < best_val_loss:
         best_val_loss = val_loss_avg
         patience_counter = 0
+        best_epoch = epoch + 1
+        best_epoch_time = time.time()
         best_state_dict = {k: v.cpu().clone() for k, v in model.state_dict().items()}
     else:
         patience_counter += 1
         if patience_counter >= patience:
-            print(f"Early stopping at epoch {epoch+1}")
+            print(f"early stopping: best epoch found at epoch {best_epoch} (best val loss: {best_val_loss:.4f})")
             break
 
 end_time = time.time()
 print(f"Model 3 training completed in {(end_time - start_time) / 60:.2f} minutes")
+print(f"Model 3 best epoch found after {(best_epoch_time - start_time) / 60:.2f} minutes")
 if best_state_dict is not None:
     model.load_state_dict(best_state_dict)
 

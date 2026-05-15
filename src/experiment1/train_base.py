@@ -13,6 +13,9 @@ if PROJECT_ROOT not in sys.path:
 from src.data_processing.process_data import *
 from src.experiment1.basic_cnn import BaseGarbageCNN
 
+#export prints to file
+sys.stdout = open('models/base_cnn_training_log.txt', 'w')
+
 train_transform, evaluation_transform = preprocess_data(use_augmentation=False)
 full_dataset = load_dataset(transform=evaluation_transform)
 train_idx, val_idx, test_idx = split_dataset_indices(full_dataset)
@@ -27,13 +30,14 @@ model = BaseGarbageCNN(num_classes=num_classes).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 max_epochs = 20
-patience = 4
+patience = 10
 best_val_loss = float("inf")
 patience_counter = 0
 best_state_dict = None
 scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=max_epochs)
 start_time = time.time()
-
+best_epoch_time = start_time
+best_epoch = 0
 for epoch in range(max_epochs):
     model.train()
     running_loss = 0.0
@@ -80,11 +84,13 @@ for epoch in range(max_epochs):
     if val_loss_avg < best_val_loss:
         best_val_loss = val_loss_avg
         patience_counter = 0
+        best_epoch = epoch + 1
+        best_epoch_time = time.time()
         best_state_dict = {key: value.cpu().clone() for key, value in model.state_dict().items()}
     else:
         patience_counter += 1
         if patience_counter >= patience:
-            print(f"early stopping at epoch {epoch+1} (best val loss: {best_val_loss:.4f})")
+            print(f"early stopping: best epoch found at epoch {best_epoch} (best val loss: {best_val_loss:.4f})")
             break
 
     if epoch == max_epochs - 1:
@@ -92,6 +98,7 @@ for epoch in range(max_epochs):
 
 end_time = time.time()
 print(f"Model 1 training completed in {(end_time - start_time) / 60:.2f} minutes")
+print(f"Model 1 best epoch found after {(best_epoch_time - start_time) / 60:.2f} minutes")
 
 if best_state_dict is not None:
     model.load_state_dict(best_state_dict)
