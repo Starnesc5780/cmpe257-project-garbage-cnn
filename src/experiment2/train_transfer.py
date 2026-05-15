@@ -14,7 +14,7 @@ from data_processing.process_data import *
 from transfer_model import get_finetune_model
 
 #export prints to file
-sys.stdout = open('models/transfer_learning_training_log.txt', 'w')
+# sys.stdout = open('training_logs/transfer_cnn_training_log.txt', 'w')
 
 train_transform, evaluation_transform = preprocess_data()
 

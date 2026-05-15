@@ -14,7 +14,7 @@ from src.data_processing.process_data import *
 from src.experiment1.basic_cnn import BaseGarbageCNN
 
 #export prints to file
-sys.stdout = open('models/base_cnn_training_log.txt', 'w')
+# sys.stdout = open('training_logs/base_cnn_training_log.txt', 'w')
 
 train_transform, evaluation_transform = preprocess_data(use_augmentation=False)
 full_dataset = load_dataset(transform=evaluation_transform)
