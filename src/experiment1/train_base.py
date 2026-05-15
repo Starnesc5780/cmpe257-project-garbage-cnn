@@ -30,7 +30,7 @@ model = BaseGarbageCNN(num_classes=num_classes).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 max_epochs = 20
-patience = 10
+patience = 8
 best_val_loss = float("inf")
 patience_counter = 0
 best_state_dict = None
