@@ -11,10 +11,7 @@ def build_test_loader(dataset, batch_size=BATCH_SIZE):
 
 
 def load_checkpoint(model, checkpoint_path, device):
-	try:
-		state_dict = torch.load(checkpoint_path, map_location=device)
-	except FileNotFoundError as e:
-		raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}") from e
+	state_dict = torch.load(checkpoint_path, map_location=device)
 	model.load_state_dict(state_dict)
 	return model
 
