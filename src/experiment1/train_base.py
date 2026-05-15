@@ -1,6 +1,6 @@
 import os
 import sys
-
+import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -32,6 +32,8 @@ best_val_loss = float("inf")
 patience_counter = 0
 best_state_dict = None
 scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=max_epochs)
+start_time = time.time()
+
 for epoch in range(max_epochs):
     model.train()
     running_loss = 0.0
@@ -87,6 +89,9 @@ for epoch in range(max_epochs):
 
     if epoch == max_epochs - 1:
         print(classification_report(all_labels, all_preds, target_names=full_dataset.classes, zero_division=0))
+
+end_time = time.time()
+print(f"Model 1 training completed in {(end_time - start_time) / 60:.2f} minutes")
 
 if best_state_dict is not None:
     model.load_state_dict(best_state_dict)

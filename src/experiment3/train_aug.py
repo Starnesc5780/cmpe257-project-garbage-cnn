@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -38,7 +39,9 @@ patience = 4
 best_val_loss = float("inf")
 patience_counter = 0
 best_state_dict = None
+start_time = time.time()
 print(f"Training for {max_epochs} epochs...")
+
 
 for epoch in range(max_epochs):
     model.train()
@@ -102,6 +105,8 @@ for epoch in range(max_epochs):
             print(f"Early stopping at epoch {epoch+1}")
             break
 
+end_time = time.time()
+print(f"Model 3 training completed in {(end_time - start_time) / 60:.2f} minutes")
 if best_state_dict is not None:
     model.load_state_dict(best_state_dict)
 
