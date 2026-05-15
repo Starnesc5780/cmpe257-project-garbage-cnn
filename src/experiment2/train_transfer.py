@@ -14,11 +14,7 @@ from transfer_model import get_finetune_model
 
 train_transform, evaluation_transform = preprocess_data()
 
-try:
-    full_dataset = load_dataset(transform=evaluation_transform)
-except Exception as e:
-    print(f"Failed to load dataset: {e}")
-    sys.exit(1)
+full_dataset = load_dataset(transform=evaluation_transform)
 
 train_idx, val_idx, test_idx = split_dataset_indices(full_dataset)
 train_data = create_base_dataset(evaluation_transform, train_idx)
