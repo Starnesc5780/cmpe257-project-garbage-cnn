@@ -8,7 +8,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-DATA_PATH = os.path.join(PROJECT_ROOT, "src", "data", "raw", "realwaste-main", "RealWaste")
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "realwaste-main", "RealWaste")
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "transfer_cnn.pth")
 
 from src.data_processing.process_data import BATCH_SIZE, preprocess_data

@@ -1,7 +1,8 @@
 import torch
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
 from torch.utils.data import DataLoader, Subset
-from data_processing.process_data import BATCH_SIZE, split_dataset_indices
+from src.data_processing.process_data import BATCH_SIZE, split_dataset_indices
+import numpy as np
 
 
 def build_test_loader(dataset, batch_size=BATCH_SIZE):
@@ -54,4 +55,8 @@ def print_metrics(experiment_name, checkpoint_path, metrics):
 	print(metrics["report"])
 	print("Confusion matrix:")
 	print(metrics["confusion_matrix"])
+	return
+
+def export_confusion_matrix(experiment_name, metrics):
+	np.savetxt(f"{experiment_name}_confusion_matrix.csv", metrics["confusion_matrix"], delimiter=",", fmt="%d")
 	return

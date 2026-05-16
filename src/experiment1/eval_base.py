@@ -8,7 +8,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-DATA_PATH = os.path.join(PROJECT_ROOT, "src", "data", "raw", "realwaste-main", "RealWaste")
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "realwaste-main", "RealWaste")
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "base_cnn_optimized.pth")
 
 from src.data_processing.process_data import BATCH_SIZE, preprocess_data
@@ -31,3 +31,4 @@ load_checkpoint(model, MODEL_PATH, device)
 test_labels, test_predictions = evaluate_model(model, test_loader, device)
 metrics = compute_metrics(test_labels, test_predictions, full_dataset.classes)
 print_metrics("Exp 1 (Base)", MODEL_PATH, metrics)
+export_confusion_matrix("Exp 1 (Base)", metrics)
