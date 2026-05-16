@@ -111,6 +111,7 @@ for epoch in range(max_epochs):
             break
 
 end_time = time.time()
+print(f"early stopping: best epoch found at epoch {best_epoch} (best val loss: {best_val_loss:.4f})")
 print(f"Model 4 training completed in {(end_time - start_time) / 60:.2f} minutes")
 print(f"Model 4 best epoch found after {(best_epoch_time - start_time) / 60:.2f} minutes")
 
