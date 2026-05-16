@@ -7,10 +7,6 @@ Note: Datasets are not uploaded to this repository, users must download from the
 * Inactive Datasets are ones that may be used in future, if needed
 ### Active Datasets
 * RealWaste, UC Irvine ML Repository, https://archive.ics.uci.edu/dataset/908/realwaste
-    * Note: Rename Labels When Downloading Raw Data From Source
-        * Food Organics -> Organics
-        * Miscellaneous Trash -> Miscellaneous
-        * Textile Trash -> Clothing
 ### Inactive Datasets
 * Waste Classification Dataset, Mendeley Data, https://archive.ics.uci.edu/dataset/908/realwaste
 
