@@ -14,7 +14,7 @@ from data_processing.process_data import *
 from aug_cnn import BaseGarbageCNN
 
 #export prints to file
-sys.stdout = open('training_logs/base_cnn_augmented_training_log.txt', 'w')
+# sys.stdout = open('training_logs/base_cnn_augmented_training_log.txt', 'w')
 
 # Preprocessing and Data Loading
 train_transform, evaluation_transform = preprocess_data(use_augmentation=True)

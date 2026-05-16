@@ -1,0 +1,287 @@
+Device: cuda
+Training for 20 epochs...
+Epoch [1/20], Step [10/208], Loss: 0.9960, Accuracy: 42.81%
+Epoch [1/20], Step [20/208], Loss: 1.1727, Accuracy: 53.44%
+Epoch [1/20], Step [30/208], Loss: 1.1378, Accuracy: 56.15%
+Epoch [1/20], Step [40/208], Loss: 0.9346, Accuracy: 58.59%
+Epoch [1/20], Step [50/208], Loss: 0.7114, Accuracy: 61.81%
+Epoch [1/20], Step [60/208], Loss: 0.9756, Accuracy: 63.28%
+Epoch [1/20], Step [70/208], Loss: 0.4507, Accuracy: 64.69%
+Epoch [1/20], Step [80/208], Loss: 0.7456, Accuracy: 65.90%
+Epoch [1/20], Step [90/208], Loss: 0.8400, Accuracy: 67.29%
+Epoch [1/20], Step [100/208], Loss: 0.6208, Accuracy: 68.09%
+Epoch [1/20], Step [110/208], Loss: 0.7981, Accuracy: 68.64%
+Epoch [1/20], Step [120/208], Loss: 0.6346, Accuracy: 69.43%
+Epoch [1/20], Step [130/208], Loss: 0.5737, Accuracy: 70.17%
+Epoch [1/20], Step [140/208], Loss: 0.5097, Accuracy: 70.65%
+Epoch [1/20], Step [150/208], Loss: 0.6692, Accuracy: 71.08%
+Epoch [1/20], Step [160/208], Loss: 0.4178, Accuracy: 71.68%
+Epoch [1/20], Step [170/208], Loss: 0.5642, Accuracy: 72.21%
+Epoch [1/20], Step [180/208], Loss: 1.0144, Accuracy: 72.55%
+Epoch [1/20], Step [190/208], Loss: 0.3890, Accuracy: 72.94%
+Epoch [1/20], Step [200/208], Loss: 0.4946, Accuracy: 73.41%
+--- Epoch 1 Summary: Train Loss: 0.7726, Train Acc: 73.69%
+Epoch 1 - Val Loss: 0.5439, Val Acc: 80.62%
+Epoch [2/20], Step [10/208], Loss: 0.3290, Accuracy: 86.25%
+Epoch [2/20], Step [20/208], Loss: 0.4944, Accuracy: 84.38%
+Epoch [2/20], Step [30/208], Loss: 0.2219, Accuracy: 84.90%
+Epoch [2/20], Step [40/208], Loss: 0.2703, Accuracy: 85.94%
+Epoch [2/20], Step [50/208], Loss: 0.1893, Accuracy: 86.06%
+Epoch [2/20], Step [60/208], Loss: 0.2595, Accuracy: 86.67%
+Epoch [2/20], Step [70/208], Loss: 0.5540, Accuracy: 86.74%
+Epoch [2/20], Step [80/208], Loss: 0.6114, Accuracy: 86.80%
+Epoch [2/20], Step [90/208], Loss: 0.5918, Accuracy: 86.25%
+Epoch [2/20], Step [100/208], Loss: 0.2366, Accuracy: 86.16%
+Epoch [2/20], Step [110/208], Loss: 0.3075, Accuracy: 86.16%
+Epoch [2/20], Step [120/208], Loss: 0.1864, Accuracy: 86.30%
+Epoch [2/20], Step [130/208], Loss: 0.2422, Accuracy: 86.30%
+Epoch [2/20], Step [140/208], Loss: 0.4197, Accuracy: 86.34%
+Epoch [2/20], Step [150/208], Loss: 0.1223, Accuracy: 86.40%
+Epoch [2/20], Step [160/208], Loss: 0.1756, Accuracy: 86.46%
+Epoch [2/20], Step [170/208], Loss: 0.2231, Accuracy: 86.54%
+Epoch [2/20], Step [180/208], Loss: 0.2137, Accuracy: 86.70%
+Epoch [2/20], Step [190/208], Loss: 0.1314, Accuracy: 86.91%
+Epoch [2/20], Step [200/208], Loss: 0.3008, Accuracy: 86.91%
+--- Epoch 2 Summary: Train Loss: 0.3789, Train Acc: 86.80%
+Epoch 2 - Val Loss: 0.5599, Val Acc: 84.69%
+Epoch [3/20], Step [10/208], Loss: 0.2742, Accuracy: 89.69%
+Epoch [3/20], Step [20/208], Loss: 0.2558, Accuracy: 89.06%
+Epoch [3/20], Step [30/208], Loss: 0.2179, Accuracy: 90.10%
+Epoch [3/20], Step [40/208], Loss: 0.3397, Accuracy: 90.39%
+Epoch [3/20], Step [50/208], Loss: 0.2965, Accuracy: 90.94%
+Epoch [3/20], Step [60/208], Loss: 0.2116, Accuracy: 91.15%
+Epoch [3/20], Step [70/208], Loss: 0.1932, Accuracy: 91.38%
+Epoch [3/20], Step [80/208], Loss: 0.1996, Accuracy: 91.72%
+Epoch [3/20], Step [90/208], Loss: 0.2465, Accuracy: 91.81%
+Epoch [3/20], Step [100/208], Loss: 0.2796, Accuracy: 91.84%
+Epoch [3/20], Step [110/208], Loss: 0.1581, Accuracy: 91.68%
+Epoch [3/20], Step [120/208], Loss: 0.4207, Accuracy: 91.56%
+Epoch [3/20], Step [130/208], Loss: 0.3253, Accuracy: 91.61%
+Epoch [3/20], Step [140/208], Loss: 0.0783, Accuracy: 91.67%
+Epoch [3/20], Step [150/208], Loss: 0.2542, Accuracy: 91.52%
+Epoch [3/20], Step [160/208], Loss: 0.1640, Accuracy: 91.60%
+Epoch [3/20], Step [170/208], Loss: 0.1457, Accuracy: 91.40%
+Epoch [3/20], Step [180/208], Loss: 0.3121, Accuracy: 91.34%
+Epoch [3/20], Step [190/208], Loss: 0.2659, Accuracy: 91.32%
+Epoch [3/20], Step [200/208], Loss: 0.3640, Accuracy: 91.36%
+--- Epoch 3 Summary: Train Loss: 0.2444, Train Acc: 91.37%
+Epoch 3 - Val Loss: 0.3733, Val Acc: 88.34%
+Epoch [4/20], Step [10/208], Loss: 0.0984, Accuracy: 94.06%
+Epoch [4/20], Step [20/208], Loss: 0.1030, Accuracy: 94.06%
+Epoch [4/20], Step [30/208], Loss: 0.1933, Accuracy: 94.06%
+Epoch [4/20], Step [40/208], Loss: 0.4363, Accuracy: 93.67%
+Epoch [4/20], Step [50/208], Loss: 0.1045, Accuracy: 93.38%
+Epoch [4/20], Step [60/208], Loss: 0.2335, Accuracy: 93.02%
+Epoch [4/20], Step [70/208], Loss: 0.3982, Accuracy: 93.04%
+Epoch [4/20], Step [80/208], Loss: 0.3890, Accuracy: 92.89%
+Epoch [4/20], Step [90/208], Loss: 0.2339, Accuracy: 92.88%
+Epoch [4/20], Step [100/208], Loss: 0.2140, Accuracy: 92.88%
+Epoch [4/20], Step [110/208], Loss: 0.2194, Accuracy: 92.90%
+Epoch [4/20], Step [120/208], Loss: 0.0735, Accuracy: 92.68%
+Epoch [4/20], Step [130/208], Loss: 0.4739, Accuracy: 92.64%
+Epoch [4/20], Step [140/208], Loss: 0.3279, Accuracy: 92.52%
+Epoch [4/20], Step [150/208], Loss: 0.2041, Accuracy: 92.52%
+Epoch [4/20], Step [160/208], Loss: 0.0816, Accuracy: 92.64%
+Epoch [4/20], Step [170/208], Loss: 0.1218, Accuracy: 92.61%
+Epoch [4/20], Step [180/208], Loss: 0.1526, Accuracy: 92.59%
+Epoch [4/20], Step [190/208], Loss: 0.1587, Accuracy: 92.60%
+Epoch [4/20], Step [200/208], Loss: 0.1496, Accuracy: 92.67%
+--- Epoch 4 Summary: Train Loss: 0.2133, Train Acc: 92.74%
+Epoch 4 - Val Loss: 0.3602, Val Acc: 88.20%
+Epoch [5/20], Step [10/208], Loss: 0.4576, Accuracy: 94.69%
+Epoch [5/20], Step [20/208], Loss: 0.5353, Accuracy: 93.91%
+Epoch [5/20], Step [30/208], Loss: 0.2930, Accuracy: 94.38%
+Epoch [5/20], Step [40/208], Loss: 0.1214, Accuracy: 94.77%
+Epoch [5/20], Step [50/208], Loss: 0.0906, Accuracy: 94.81%
+Epoch [5/20], Step [60/208], Loss: 0.4760, Accuracy: 94.74%
+Epoch [5/20], Step [70/208], Loss: 0.1696, Accuracy: 94.73%
+Epoch [5/20], Step [80/208], Loss: 0.1059, Accuracy: 94.96%
+Epoch [5/20], Step [90/208], Loss: 0.0594, Accuracy: 94.97%
+Epoch [5/20], Step [100/208], Loss: 0.0243, Accuracy: 95.12%
+Epoch [5/20], Step [110/208], Loss: 0.2811, Accuracy: 95.28%
+Epoch [5/20], Step [120/208], Loss: 0.1682, Accuracy: 95.39%
+Epoch [5/20], Step [130/208], Loss: 0.2690, Accuracy: 95.29%
+Epoch [5/20], Step [140/208], Loss: 0.1558, Accuracy: 95.22%
+Epoch [5/20], Step [150/208], Loss: 0.0252, Accuracy: 94.94%
+Epoch [5/20], Step [160/208], Loss: 0.1529, Accuracy: 94.84%
+Epoch [5/20], Step [170/208], Loss: 0.2293, Accuracy: 94.80%
+Epoch [5/20], Step [180/208], Loss: 0.0254, Accuracy: 94.93%
+Epoch [5/20], Step [190/208], Loss: 0.0773, Accuracy: 94.90%
+Epoch [5/20], Step [200/208], Loss: 0.1079, Accuracy: 94.95%
+--- Epoch 5 Summary: Train Loss: 0.1566, Train Acc: 94.87%
+Epoch 5 - Val Loss: 0.4117, Val Acc: 89.04%
+Epoch [6/20], Step [10/208], Loss: 0.0281, Accuracy: 96.25%
+Epoch [6/20], Step [20/208], Loss: 0.2916, Accuracy: 95.78%
+Epoch [6/20], Step [30/208], Loss: 0.1944, Accuracy: 96.04%
+Epoch [6/20], Step [40/208], Loss: 0.0313, Accuracy: 96.41%
+Epoch [6/20], Step [50/208], Loss: 0.1831, Accuracy: 96.19%
+Epoch [6/20], Step [60/208], Loss: 0.0769, Accuracy: 96.35%
+Epoch [6/20], Step [70/208], Loss: 0.0326, Accuracy: 96.47%
+Epoch [6/20], Step [80/208], Loss: 0.2072, Accuracy: 96.56%
+Epoch [6/20], Step [90/208], Loss: 0.1616, Accuracy: 96.60%
+Epoch [6/20], Step [100/208], Loss: 0.1097, Accuracy: 96.69%
+Epoch [6/20], Step [110/208], Loss: 0.2157, Accuracy: 96.70%
+Epoch [6/20], Step [120/208], Loss: 0.0161, Accuracy: 96.67%
+Epoch [6/20], Step [130/208], Loss: 0.0790, Accuracy: 96.66%
+Epoch [6/20], Step [140/208], Loss: 0.1096, Accuracy: 96.56%
+Epoch [6/20], Step [150/208], Loss: 0.3552, Accuracy: 96.44%
+Epoch [6/20], Step [160/208], Loss: 0.1500, Accuracy: 96.29%
+Epoch [6/20], Step [170/208], Loss: 0.0272, Accuracy: 96.31%
+Epoch [6/20], Step [180/208], Loss: 0.0284, Accuracy: 96.22%
+Epoch [6/20], Step [190/208], Loss: 0.1218, Accuracy: 96.15%
+Epoch [6/20], Step [200/208], Loss: 0.1506, Accuracy: 96.17%
+--- Epoch 6 Summary: Train Loss: 0.1218, Train Acc: 96.20%
+Epoch 6 - Val Loss: 0.4531, Val Acc: 88.34%
+Epoch [7/20], Step [10/208], Loss: 0.4702, Accuracy: 96.25%
+Epoch [7/20], Step [20/208], Loss: 0.0746, Accuracy: 96.09%
+Epoch [7/20], Step [30/208], Loss: 0.1641, Accuracy: 95.94%
+Epoch [7/20], Step [40/208], Loss: 0.1971, Accuracy: 96.09%
+Epoch [7/20], Step [50/208], Loss: 0.1076, Accuracy: 95.94%
+Epoch [7/20], Step [60/208], Loss: 0.1014, Accuracy: 95.73%
+Epoch [7/20], Step [70/208], Loss: 0.2444, Accuracy: 95.49%
+Epoch [7/20], Step [80/208], Loss: 0.2227, Accuracy: 95.23%
+Epoch [7/20], Step [90/208], Loss: 0.0093, Accuracy: 95.31%
+Epoch [7/20], Step [100/208], Loss: 0.2328, Accuracy: 95.31%
+Epoch [7/20], Step [110/208], Loss: 0.4511, Accuracy: 95.26%
+Epoch [7/20], Step [120/208], Loss: 0.1414, Accuracy: 95.31%
+Epoch [7/20], Step [130/208], Loss: 0.0082, Accuracy: 95.48%
+Epoch [7/20], Step [140/208], Loss: 0.0072, Accuracy: 95.40%
+Epoch [7/20], Step [150/208], Loss: 0.2448, Accuracy: 95.40%
+Epoch [7/20], Step [160/208], Loss: 0.1652, Accuracy: 95.25%
+Epoch [7/20], Step [170/208], Loss: 0.2780, Accuracy: 95.22%
+Epoch [7/20], Step [180/208], Loss: 0.0701, Accuracy: 95.38%
+Epoch [7/20], Step [190/208], Loss: 0.0192, Accuracy: 95.33%
+Epoch [7/20], Step [200/208], Loss: 0.0708, Accuracy: 95.38%
+--- Epoch 7 Summary: Train Loss: 0.1344, Train Acc: 95.35%
+Epoch 7 - Val Loss: 0.4657, Val Acc: 88.76%
+Epoch [8/20], Step [10/208], Loss: 0.0216, Accuracy: 96.88%
+Epoch [8/20], Step [20/208], Loss: 0.0627, Accuracy: 96.56%
+Epoch [8/20], Step [30/208], Loss: 0.0995, Accuracy: 96.77%
+Epoch [8/20], Step [40/208], Loss: 0.1675, Accuracy: 96.88%
+Epoch [8/20], Step [50/208], Loss: 0.0284, Accuracy: 97.12%
+Epoch [8/20], Step [60/208], Loss: 0.0509, Accuracy: 97.08%
+Epoch [8/20], Step [70/208], Loss: 0.2498, Accuracy: 96.92%
+Epoch [8/20], Step [80/208], Loss: 0.0526, Accuracy: 96.80%
+Epoch [8/20], Step [90/208], Loss: 0.0482, Accuracy: 96.56%
+Epoch [8/20], Step [100/208], Loss: 0.0218, Accuracy: 96.41%
+Epoch [8/20], Step [110/208], Loss: 0.0582, Accuracy: 96.51%
+Epoch [8/20], Step [120/208], Loss: 0.0316, Accuracy: 96.41%
+Epoch [8/20], Step [130/208], Loss: 0.0709, Accuracy: 96.37%
+Epoch [8/20], Step [140/208], Loss: 0.3688, Accuracy: 96.45%
+Epoch [8/20], Step [150/208], Loss: 0.0578, Accuracy: 96.56%
+Epoch [8/20], Step [160/208], Loss: 0.0091, Accuracy: 96.56%
+Epoch [8/20], Step [170/208], Loss: 0.0441, Accuracy: 96.60%
+Epoch [8/20], Step [180/208], Loss: 0.0067, Accuracy: 96.58%
+Epoch [8/20], Step [190/208], Loss: 0.0915, Accuracy: 96.50%
+Epoch [8/20], Step [200/208], Loss: 0.1265, Accuracy: 96.41%
+--- Epoch 8 Summary: Train Loss: 0.1127, Train Acc: 96.42%
+Epoch 8 - Val Loss: 0.4219, Val Acc: 89.04%
+Epoch [9/20], Step [10/208], Loss: 0.0835, Accuracy: 97.81%
+Epoch [9/20], Step [20/208], Loss: 0.0218, Accuracy: 97.66%
+Epoch [9/20], Step [30/208], Loss: 0.0939, Accuracy: 97.50%
+Epoch [9/20], Step [40/208], Loss: 0.0402, Accuracy: 97.58%
+Epoch [9/20], Step [50/208], Loss: 0.0447, Accuracy: 97.38%
+Epoch [9/20], Step [60/208], Loss: 0.1347, Accuracy: 97.29%
+Epoch [9/20], Step [70/208], Loss: 0.0855, Accuracy: 97.23%
+Epoch [9/20], Step [80/208], Loss: 0.0436, Accuracy: 97.23%
+Epoch [9/20], Step [90/208], Loss: 0.1627, Accuracy: 97.19%
+Epoch [9/20], Step [100/208], Loss: 0.1031, Accuracy: 97.12%
+Epoch [9/20], Step [110/208], Loss: 0.0122, Accuracy: 97.19%
+Epoch [9/20], Step [120/208], Loss: 0.0767, Accuracy: 97.03%
+Epoch [9/20], Step [130/208], Loss: 0.0947, Accuracy: 97.12%
+Epoch [9/20], Step [140/208], Loss: 0.0110, Accuracy: 97.17%
+Epoch [9/20], Step [150/208], Loss: 0.0778, Accuracy: 97.25%
+Epoch [9/20], Step [160/208], Loss: 0.0539, Accuracy: 97.29%
+Epoch [9/20], Step [170/208], Loss: 0.1861, Accuracy: 97.26%
+Epoch [9/20], Step [180/208], Loss: 0.0075, Accuracy: 97.36%
+Epoch [9/20], Step [190/208], Loss: 0.1053, Accuracy: 97.27%
+Epoch [9/20], Step [200/208], Loss: 0.1031, Accuracy: 97.19%
+--- Epoch 9 Summary: Train Loss: 0.0790, Train Acc: 97.20%
+Epoch 9 - Val Loss: 0.4852, Val Acc: 87.78%
+Epoch [10/20], Step [10/208], Loss: 0.0584, Accuracy: 98.44%
+Epoch [10/20], Step [20/208], Loss: 0.0297, Accuracy: 98.59%
+Epoch [10/20], Step [30/208], Loss: 0.1315, Accuracy: 98.02%
+Epoch [10/20], Step [40/208], Loss: 0.0527, Accuracy: 97.81%
+Epoch [10/20], Step [50/208], Loss: 0.0682, Accuracy: 97.56%
+Epoch [10/20], Step [60/208], Loss: 0.0876, Accuracy: 97.66%
+Epoch [10/20], Step [70/208], Loss: 0.0863, Accuracy: 97.54%
+Epoch [10/20], Step [80/208], Loss: 0.0598, Accuracy: 97.50%
+Epoch [10/20], Step [90/208], Loss: 0.0443, Accuracy: 97.57%
+Epoch [10/20], Step [100/208], Loss: 0.0546, Accuracy: 97.62%
+Epoch [10/20], Step [110/208], Loss: 0.0546, Accuracy: 97.61%
+Epoch [10/20], Step [120/208], Loss: 0.1196, Accuracy: 97.71%
+Epoch [10/20], Step [130/208], Loss: 0.0583, Accuracy: 97.62%
+Epoch [10/20], Step [140/208], Loss: 0.0928, Accuracy: 97.68%
+Epoch [10/20], Step [150/208], Loss: 0.0059, Accuracy: 97.69%
+Epoch [10/20], Step [160/208], Loss: 0.1063, Accuracy: 97.60%
+Epoch [10/20], Step [170/208], Loss: 0.0939, Accuracy: 97.63%
+Epoch [10/20], Step [180/208], Loss: 0.1643, Accuracy: 97.62%
+Epoch [10/20], Step [190/208], Loss: 0.0214, Accuracy: 97.55%
+Epoch [10/20], Step [200/208], Loss: 0.0159, Accuracy: 97.44%
+--- Epoch 10 Summary: Train Loss: 0.0722, Train Acc: 97.41%
+Epoch 10 - Val Loss: 0.5448, Val Acc: 87.92%
+Epoch [11/20], Step [10/208], Loss: 0.0222, Accuracy: 97.19%
+Epoch [11/20], Step [20/208], Loss: 0.0456, Accuracy: 96.72%
+Epoch [11/20], Step [30/208], Loss: 0.0069, Accuracy: 96.77%
+Epoch [11/20], Step [40/208], Loss: 0.1464, Accuracy: 96.80%
+Epoch [11/20], Step [50/208], Loss: 0.0167, Accuracy: 96.94%
+Epoch [11/20], Step [60/208], Loss: 0.0589, Accuracy: 96.98%
+Epoch [11/20], Step [70/208], Loss: 0.0033, Accuracy: 96.74%
+Epoch [11/20], Step [80/208], Loss: 0.1065, Accuracy: 96.56%
+Epoch [11/20], Step [90/208], Loss: 0.0685, Accuracy: 96.77%
+Epoch [11/20], Step [100/208], Loss: 0.0390, Accuracy: 96.69%
+Epoch [11/20], Step [110/208], Loss: 0.2407, Accuracy: 96.79%
+Epoch [11/20], Step [120/208], Loss: 0.0506, Accuracy: 96.88%
+Epoch [11/20], Step [130/208], Loss: 0.0256, Accuracy: 96.95%
+Epoch [11/20], Step [140/208], Loss: 0.0341, Accuracy: 97.01%
+Epoch [11/20], Step [150/208], Loss: 0.0624, Accuracy: 96.92%
+Epoch [11/20], Step [160/208], Loss: 0.0027, Accuracy: 96.99%
+Epoch [11/20], Step [170/208], Loss: 0.0041, Accuracy: 96.99%
+Epoch [11/20], Step [180/208], Loss: 0.0979, Accuracy: 97.03%
+Epoch [11/20], Step [190/208], Loss: 0.1195, Accuracy: 96.94%
+Epoch [11/20], Step [200/208], Loss: 0.1292, Accuracy: 96.98%
+--- Epoch 11 Summary: Train Loss: 0.0927, Train Acc: 96.96%
+Epoch 11 - Val Loss: 0.4154, Val Acc: 88.62%
+Epoch [12/20], Step [10/208], Loss: 0.0232, Accuracy: 98.12%
+Epoch [12/20], Step [20/208], Loss: 0.0305, Accuracy: 98.44%
+Epoch [12/20], Step [30/208], Loss: 0.0303, Accuracy: 97.92%
+Epoch [12/20], Step [40/208], Loss: 0.1230, Accuracy: 97.81%
+Epoch [12/20], Step [50/208], Loss: 0.0590, Accuracy: 97.62%
+Epoch [12/20], Step [60/208], Loss: 0.0463, Accuracy: 97.24%
+Epoch [12/20], Step [70/208], Loss: 0.1363, Accuracy: 97.37%
+Epoch [12/20], Step [80/208], Loss: 0.0322, Accuracy: 97.38%
+Epoch [12/20], Step [90/208], Loss: 0.0015, Accuracy: 97.12%
+Epoch [12/20], Step [100/208], Loss: 0.5344, Accuracy: 97.03%
+Epoch [12/20], Step [110/208], Loss: 0.0382, Accuracy: 96.99%
+Epoch [12/20], Step [120/208], Loss: 0.0099, Accuracy: 96.95%
+Epoch [12/20], Step [130/208], Loss: 0.0118, Accuracy: 96.90%
+Epoch [12/20], Step [140/208], Loss: 0.0576, Accuracy: 96.90%
+Epoch [12/20], Step [150/208], Loss: 0.0729, Accuracy: 96.88%
+Epoch [12/20], Step [160/208], Loss: 0.0052, Accuracy: 96.80%
+Epoch [12/20], Step [170/208], Loss: 0.0647, Accuracy: 96.82%
+Epoch [12/20], Step [180/208], Loss: 0.0570, Accuracy: 96.82%
+Epoch [12/20], Step [190/208], Loss: 0.1124, Accuracy: 96.91%
+Epoch [12/20], Step [200/208], Loss: 0.0385, Accuracy: 96.95%
+--- Epoch 12 Summary: Train Loss: 0.0871, Train Acc: 96.93%
+Epoch 12 - Val Loss: 0.4058, Val Acc: 90.59%
+early stopping: best epoch found at epoch 4 (best val loss: 0.3602)
+early stopping: best epoch found at epoch 4 (best val loss: 0.3602)
+Model 4 training completed in 9.75 minutes
+Model 4 best epoch found after 3.18 minutes
+                     precision    recall  f1-score   support
+
+          Cardboard       0.88      0.96      0.92        71
+      Food Organics       0.95      0.95      0.95        55
+              Glass       0.91      0.89      0.90        66
+              Metal       0.87      0.90      0.88       114
+Miscellaneous Trash       0.78      0.79      0.79        78
+              Paper       0.97      0.85      0.91        87
+            Plastic       0.82      0.87      0.84       126
+      Textile Trash       0.95      0.81      0.87        47
+         Vegetation       0.96      0.96      0.96        70
+
+           accuracy                           0.89       714
+          macro avg       0.90      0.89      0.89       714
+       weighted avg       0.89      0.89      0.89       714
+
+Saved to c:\Users\conno\OneDrive\Documents\Desktop\CMPE257\cmpe257-project-garbage-cnn\src\experiment4\models\transfer_cnn_augmented.pth
